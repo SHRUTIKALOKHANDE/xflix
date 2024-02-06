@@ -4,8 +4,12 @@ import { config } from 'dotenv';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   config();
+
+  /* Enabling CORS */
+  // app.enableCors();
+
 
   const document = SwaggerModule.createDocument(
     app,
