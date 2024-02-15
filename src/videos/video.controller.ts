@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put, Query } from "@nestjs/common";
 import { VideoService } from "./video.service";
 import { ApiTags } from '@nestjs/swagger';
-import { CreateVideoDto, updateVideoVoteDto } from "./dto/create-video.dto";
+import { CreateVideoDto, updateVideoVoteDto, updateVideoViewsDto } from "./dto/create-video.dto";
 
 @ApiTags('XFlix-videos')
 @Controller({
@@ -26,7 +26,13 @@ export class VideoController {
 
   @Put(':videoId/votes')
   @HttpCode(201)
-  update(@Param('videoId') videoId: string, @Body() updateVideoDto: updateVideoVoteDto) {
-    return this.videoService.update(videoId, updateVideoDto);
+  updateVotes(@Param('videoId') videoId: string, @Body() updateVideoVoteDto: updateVideoVoteDto) {
+    return this.videoService.updateVotes(videoId, updateVideoVoteDto);
+  }
+
+  @Put(':videoId/views')
+  @HttpCode(201)
+  updateViews(@Param('videoId') videoId: string, @Body() updateVideoViewsDto: updateVideoViewsDto) {
+    return this.videoService.updateViews(videoId, updateVideoViewsDto);
   }
 }

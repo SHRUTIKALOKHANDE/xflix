@@ -32,10 +32,10 @@ export class Video extends Document {
 	@Prop({required: true})
 	previewImage:  String;
 
-	@Prop({  type: VotesSchema })
+	@Prop({type: VotesSchema })
 	votes: Votes;
 
-	@Prop()
+	@Prop({default: 0})
 	viewCount: Number;
 
 };

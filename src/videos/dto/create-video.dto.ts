@@ -39,14 +39,18 @@ export class CreateVideoDto {
   @IsNumber()
   viewCount: number;
 }
-
-
 export class updateVideoVoteDto {
   @ApiProperty({ required: true, enum: vote })
   @IsNotEmpty()
   @IsString()
   vote: string;
 
+  @ApiProperty({ required: true, enum: voteChange })
+  @IsNotEmpty()
+  @IsString()
+  change: string;
+}
+export class updateVideoViewsDto {
   @ApiProperty({ required: true, enum: voteChange })
   @IsNotEmpty()
   @IsString()
