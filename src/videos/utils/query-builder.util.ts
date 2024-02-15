@@ -19,8 +19,13 @@ export class QueryBuilderUtils {
 				} else {
 					filterObj['value'] = params[key];
 					filterObj['operator'] = 'eq';
+				}	
+
+				if (filterObj.name === 'genre' && (filterObj.value === 'All' || filterObj.arr_value.includes('All'))) {
+					return; 
+				} else {
+					filters.push(this._getFilterObject(filterObj));
 				}
-				filters.push(this._getFilterObject(filterObj));
 			}
 		});
 		return filters;
@@ -46,8 +51,8 @@ export class QueryBuilderUtils {
 	}
 
 	public static _getLowerRatings = (rating) => {
-		const allRatings = ["Anyone", "7+", "12+", "16+", "18+"];
-		const index = allRatings.indexOf(rating);
+		const allRatings = ["any", "7+", "12+", "16+", "18+"];
+		const index = allRatings.indexOf(rating.trim());
 		if (index !== -1) {
 			return allRatings.slice(0, index + 1);
 		} else {
